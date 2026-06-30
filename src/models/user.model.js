@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
         },
         avatar: {
             url: { type: String, default: "" },
-            publicId: { type: String, default: "" }
+            public_id: { type: String, default: "" }
         },
         role: {
             type: String,
