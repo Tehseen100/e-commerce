@@ -14,7 +14,6 @@ app.use(cors({
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public")); // Serve static files from the "public" directory
 app.use(cookieParser());
 
 // Routes
