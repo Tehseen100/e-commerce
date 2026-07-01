@@ -16,11 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
 // Routes
 import userRouter from "./routes/user.routes.js";
 
-app.use("/api/users", userRouter);
-
+app.use("/api/v1/users", userRouter);
 
 
 // Error handling middleware

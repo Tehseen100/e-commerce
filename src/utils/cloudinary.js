@@ -17,15 +17,13 @@ const uploadOnCloudinary = async (filePath) => {
             folder: "ecommerce",
             resource_type: "auto"
         });
-        // console.log("file is uploaded on cloudinary ", response.url);
 
-        // Delete the file from local storage after uploading to Cloudinary
-        fs.unlinkSync(filePath);
-        return response.secure_url;
+        return response;
     } catch (error) {
         console.log("Cloudinary upload failed", error);
-        fs.unlinkSync(filePath);
         return null;
+    } finally {
+        removeLocalFile(filePath);
     }
 }
 
@@ -40,4 +38,18 @@ const deleteFromCloudinary = async (public_id, resource_type = "image") => {
     }
 }
 
-export { uploadOnCloudinary, deleteFromCloudinary }
+// Removes a file from local disk
+const removeLocalFile = (filePath) => {
+    try {
+        if (!filePath) return null;
+
+        if (filePath && fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+    } catch (error) {
+        console.log("Local file cleanup failed", error);
+        return null;
+    }
+}
+
+export { uploadOnCloudinary, deleteFromCloudinary, removeLocalFile }
